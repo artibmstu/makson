@@ -1,0 +1,26 @@
+func InJsonBooks() {
+
+	type bookas struct {
+		Name     string `json:"name"`
+		Count    int    `json:"count"`
+		Idizd    int    `json:"id_izdatelya"`
+		Idauthor []int  `json:"id_autora"`
+	}
+	var bookases []bookas
+	file, _ := os.Open("bookas.json")
+	dec := json.NewDecoder(file)
+	err := dec.Decode(&bookases) //books
+	if err != nil {
+		panic(err)
+	}
+	books = nil
+	for i := 0; i < len(bookases); i++ {
+		transbook := book{
+			name:     bookases[i].Name,
+			count:    bookases[i].Count,
+			idizd:    bookases[i].Idizd,
+			idauthor: bookases[i].Idauthor}
+		books = append(books, transbook)
+	}
+	fmt.Println(books)
+}
