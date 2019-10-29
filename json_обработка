@@ -1,0 +1,26 @@
+//token - ссылка на api
+	get_json, err := http.Get(token)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer get_json.Body.Close()
+
+	body, err := ioutil.ReadAll(get_json.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+
+
+	type Getparam struct {
+		Id int `json:"id"`
+		Name string `json:"name"`
+	}
+	var getpar []Getparam
+
+	jsonErr := json.Unmarshal(body, &getpar)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
+
+	fmt.Println(getpar[1].Id)
